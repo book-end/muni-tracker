@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let buses = [
+    @State var buses = [
         BusArrival(routeName: "14 Mission", arrivalTime: "3 min"),
         BusArrival(routeName: "49 Van Ness", arrivalTime: "7 min"),
         BusArrival(routeName: "38 Geary", arrivalTime: "12 min")
