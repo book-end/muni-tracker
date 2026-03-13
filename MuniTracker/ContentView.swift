@@ -15,7 +15,7 @@ struct ContentView: View {
     @StateObject var viewModel = BusArrivalViewModel()
     
     var body: some View {
-        VStack {
+        Group {
             if viewModel.loadingState == .loading {
                 ProgressView("Loading bus times...")
             } else if viewModel.loadingState == .success {
@@ -26,6 +26,12 @@ struct ContentView: View {
                 Text("Something went wrong!")
             }
             
+        }
+        
+        .task {
+            // Runs when ContentView appears on screen
+            // await added because fetchBusArrivals is async func
+            await viewModel.fetchBusArrivals()
         }
         .padding()
         
