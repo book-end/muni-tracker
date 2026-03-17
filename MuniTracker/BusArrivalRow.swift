@@ -24,9 +24,5 @@ struct BusArrivalRow: View {
     
 }
 
-#Preview {
-    BusArrivalRow(routeName: "14 Mission", arrivalTime: "3 min")
-}
-
 
 

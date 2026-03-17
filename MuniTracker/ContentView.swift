@@ -20,7 +20,7 @@ struct ContentView: View {
                 ProgressView("Loading bus times...")
             } else if viewModel.loadingState == .success {
                 ForEach(viewModel.buses, id: \.id) { bus in
-                    BusArrivalRow(routeName: bus.routeName, arrivalTime: bus.arrivalTime)
+                    BusArrivalRow(routeName: bus.routeName, arrivalTime: bus.friendlyArrivalTime)
                 }
             } else {
                 Text("Something went wrong!")
