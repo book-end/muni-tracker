@@ -45,5 +45,9 @@ struct MonitoredVehicleJourney: Codable {
 }
 
 struct MonitoredCall: Codable {
-    let ExpectedArrivalTime: String
+    let ExpectedArrivalTime: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case ExpectedArrivalTime = "ExpectedArrivalTime"
+    }
 }
