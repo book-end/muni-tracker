@@ -35,6 +35,8 @@ class BusArrivalViewModel: ObservableObject {
             // await: pause this function and wait for data from URLSession, but everything else keeps running
             let (data, _) = try await URLSession.shared.data(from: urlObject)
             
+            print("Raw response: \(String(data: data, encoding: .utf8) ?? "no data")")
+            
             // Convert raw response into readable String
             // print(String(data: data, encoding: .utf8) ?? "No data")
             // Replaced with below, the decoder
