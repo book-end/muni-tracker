@@ -9,7 +9,7 @@ A native iOS app for tracking real-time SF Muni bus arrivals and locations. Insp
 ## Features
 
 - **511 SF Bay API** - live data integration *(complete)*
-- **Nearby Stop Times** - real-time arrival predictions for Muni stops near you*(in-progress)*
+- **Nearby Stop Times** - real-time arrival predictions for Muni stops near you *(in-progress)*
 - **Live Bus Map** - real-time bus locations on a MapKit map *(coming soon)*
 - **Favorites** - save frequently used lines, stored locally on device *(coming soon)*
 - **Route Search** - search any Muni route by line number *(coming soon)*
