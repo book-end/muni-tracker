@@ -18,10 +18,16 @@ class BusArrivalViewModel: ObservableObject {
     // Note: async means to let everything else keep running while this func runs
     @MainActor
     func fetchBusArrivals() async {
-        let apiKey = SecretsManager.apiKey()
+        
+        // put guard so that the key doesn't return as optional
+        guard let apiKey = SecretsManager.getApiKey() else {
+            print("No API key available")
+            return
+        }
         
         // Build url string with api key
         let urlString = "https://api.511.org/transit/StopMonitoring?api_key=\(apiKey)&agency=SF&stopCode=15184&format=json"
+        print("Request URL: \(urlString)")
         
         // Convert url string into a proper url object
         guard let urlObject = URL(string: urlString) else {
