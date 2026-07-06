@@ -7,8 +7,32 @@
 
 import Foundation
 
-struct SecretsManager {
-    static func apiKey() -> String {
+enum SecretsManager {
+    
+    private static let keychainKey = "muni_api_key"
+    
+    static func getApiKey() -> String? {
+        
+        // check for existing api key in keychain
+        if let existingKey = KeychainManager.read(key: keychainKey) {
+            return existingKey
+        }
+        
+        // get key from plist if keychain is empty, just one time
+        guard let plistKey = readFromPlist() else {
+            return nil
+        }
+        
+        // inject the plist key to keychain, just one time
+        let saveSucceeded = KeychainManager.save(key: keychainKey, value: plistKey)
+        if !saveSucceeded {
+            print("Warning: failed to save API Key to Keychain")
+        }
+        
+        return plistKey
+    }
+    
+    private static func readFromPlist() -> String? {
         
         // Find Secrets.plist file in app bundle and save its path
         guard let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),

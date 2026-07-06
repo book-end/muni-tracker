@@ -26,7 +26,7 @@ enum KeychainManager {
         ]
         
         // delete item from keychain if existing, btw cfdictionary is just a regulary dictionary
-        SecItemDelete(<#T##query: CFDictionary##CFDictionary#>)
+        SecItemDelete(query as CFDictionary)
         
         // write item into keychain, returns a number depending on success/fail
         let status = SecItemAdd(query as CFDictionary, nil)
