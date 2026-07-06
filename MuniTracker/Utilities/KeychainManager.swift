@@ -59,4 +59,19 @@ enum KeychainManager {
         // convert data into readable string
         return String(data: data, encoding: .utf8)
     }
+    
+    // DELETE key if saved, returns true if worked and false if something went wrong
+    static func delete(key: String) -> Bool {
+        
+        // get dictionary item
+        let query : [String : Any] = [
+            kSecClass as String : kSecClassGenericPassword,
+            kSecAttrAccount as String : key
+        ]
+        
+        // delete dictionary item
+        let status = SecItemDelete(query as CFDictionary)
+        
+        return status == errSecSuccess || status == errSecItemNotFound
+    }
 }
