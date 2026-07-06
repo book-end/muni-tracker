@@ -37,7 +37,26 @@ enum KeychainManager {
     
     // READ key previously saved and returns it as a string decrypted by keychain
     // need original string to autheneticate against API
-    static func read(key: String) -> String {
+    static func read(key: String) -> String? {
         
+        // get the dictionary item first
+        let query : [String : Any] = [
+            kSecClass as String : kSecClassGenericPassword,
+            kSecAttrAccount as String : key,
+            kSecReturnData as String : true,
+            kSecMatchLimit as String : kSecMatchLimitOne // get only one result
+        ]
+        
+        // holds whatever dictionary item that it gets
+        var result : AnyObject?
+        
+        // perform the lookup and write it into result
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        
+        // two things have to be true: lookup matches and data can be turned into data
+        guard status == errSecSuccess, let data = result as? Data else {return nil}
+        
+        // convert data into readable string
+        return String(data: data, encoding: .utf8)
     }
 }
