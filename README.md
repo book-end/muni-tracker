@@ -2,7 +2,7 @@
 
 > Work in Progress
 
-A native iOS app for tracking real-time SF Muni bus arrivals and locations. Inspired by the removal of a popular Muni app from the App Store that many riders, particularly seniors, relied on daily. Built as a portfolio project using SwiftUI, MVVM architecture, and live data from the 511 SF Bay API, with a focus on simplicity and ease of use.
+A native iOS app for tracking real-time SF Muni bus arrivals and locations. Inspired by the removal of a popular Muni app from the App Store that many riders, particularly seniors, relied on daily. Built as a portfolio project using SwiftUI, MVVM architecture, and live data from the 511 SF Bay API.
 
 ---
 
@@ -28,7 +28,12 @@ This app follows the **MVVM (Model-View-ViewModel)**:
 - **Models** - `BusArrival`, `BusArrivalResponse` (data structures, API response mapping)
 - **ViewModels** - `BusArrivalViewModel` (handles networking, JSON parsing, state management)
 - **Views** - `ContentView`, `BusArrivalRow` (declarative UI)
-- **Utilities** - `SecretsManager` (secure API token access)
+- **Utilities** - `SecretsManager`, `KeychainManager` (secure API token storage and access via iOS Keychain)
+
+## Security
+- API credentials are stored using iOS Keychain Services
+- A custom KeychainManager wrapper handles secure save, read, and delete operations for stored credentials
+- `Secrets.plist` is used only as a one-time migration source on first app launch, and is excluded from version control via .gitignore
 
 ## Getting Started
 ### Prerequisites
@@ -43,6 +48,11 @@ This app follows the **MVVM (Model-View-ViewModel)**:
     Type: String
     Value: [Your-511-Token]
     ```
+    
+    ```
+    Note: 'Secrets.plist' is only used to seed the API key into iOS Keychain on first launch.
+    ```
+    
 3. Open `MuniTracker.xcodeproj` in Xcode and run on an iOS device.
 
 ## API
